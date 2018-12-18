@@ -42,14 +42,24 @@ p {
   font-size: 100%;
   text-align: center;
   padding: 1%;
+  color: white;
 }
 
-.input-group > .submit{
+.input-group > input:focus {
+  background-color: grey;
+  color: grey;
+}
+
+.input-group > * > .submit{
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-top: 5%;
   background-color: green;
   font-family: 'Kanit', sans-serif;
   font-size: 100%;
-  padding: 1%;
+  padding: 5%;
   cursor: pointer;
+  color: black;
 }
 
 .input-group > .error-log{

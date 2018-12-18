@@ -28,18 +28,23 @@
           Site:
         </span>
         <span class="error-log error-site">Can not be left empty</span>
-        <input type="text" name="site" placeholder="Facebook"><br>
+        <input type="text" name="site" placeholder="Facebook">
         <span>
           Easy password:
         </span>
-        <span class="error-log error-pw">Must be at least 5 letters</span>
-        <input type="text" name="password" placeholder="ketchup"><br>
+        <span class="error-log error-pw">Only letters a-z and at least 5 long</span>
+        <input type="text" name="password" placeholder="ketchup">
         <span>
-          Some number:
+          Some number (0-9999):
         </span>
-        <span class="error-log error-number">Must be a number</span>
-        <input type="text" name="number" placeholder="1971"><br>
-        <input class="submit" type="submit" value="Submit" onclick="generatePassword()">
+        <span class="error-log error-number">Must be a number from 0 to 9999</span>
+        <input type="text" name="number" placeholder="1971">
+
+        <section>
+
+          <input class="submit" type="submit" value="Submit" onclick="generatePassword()">
+
+        </section>
       </section>
 
     </section>
