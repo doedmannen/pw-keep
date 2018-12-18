@@ -1,6 +1,7 @@
-
+// Bring focus to first input field on pageload
 document.getElementsByTagName('input')[0].focus();
 
+// Listen for enter inside input-group
 document.querySelector('.input-group').addEventListener('keydown', (e) => {
     var key = e.which || e.keyCode;
     if (key === 13) {
@@ -9,6 +10,7 @@ document.querySelector('.input-group').addEventListener('keydown', (e) => {
 });
 
 
+// Main function for generating password
 function generatePassword() {
   // Get values from input
   let site, password, number, output, inputString, check;
@@ -17,6 +19,7 @@ function generatePassword() {
   number = document.getElementsByTagName('input')[2].value.trim();
   output = document.getElementsByClassName('output-pw')[0];
 
+  // Make sure we clear all the fields
   document.getElementsByTagName('input')[0].value = "";
   document.getElementsByTagName('input')[1].value = "";
   document.getElementsByTagName('input')[2].value = "";
@@ -29,20 +32,27 @@ function generatePassword() {
   // Parse number
   number = number / 1;
 
+  // Get a number for a bad shuffle of random string later on
   check = getCheck(site, password);
 
+  // First step make one string out of site and password. Mix them.
   inputString = organizeString(site, password);
 
+  // Turn that string into numbers using charCodeAt multiplied with a prime number
   inputString = intoNumbers(inputString, number);
 
+  // Turn that into a string again using a random string
   inputString = intoRandom(inputString, check);
 
+  // Make the output 20 chars long
   inputString = shortenString(inputString, 20);
 
+  // Update output and bring focus back to first input
   output.innerHTML = inputString;
   document.getElementsByTagName('input')[0].focus();
 }
 
+// For every letter in site + password get last num in charcode and add
 function getCheck(s, p) {
   let total = s+p;
   let output = 0;
@@ -53,6 +63,7 @@ function getCheck(s, p) {
 }
 
 
+// Output needs to be a certain size
 function shortenString(s, size) {
   let jump = parseInt(s.length/size);
   let output = "";
@@ -62,6 +73,7 @@ function shortenString(s, size) {
   return output;
 }
 
+// Turning string into numbers
 function intoNumbers(s, n) {
   output = "";
   n = getPrimes(n);
@@ -72,8 +84,9 @@ function intoNumbers(s, n) {
   return s.join("");
 }
 
+
+// Take numbers into random chars
 function intoRandom(s, c) {
-  console.log(c);
 
   let randomStuff = "8pi2d9IjSs4FNWZzn5HvRkQuYwbymqOJgtelKoPEf1TL3BAcChr0aGVMxUXD76";
   let lengthOfStuff = randomStuff.length;
@@ -86,7 +99,6 @@ function intoRandom(s, c) {
 
   randomStuff = randomStuff.substr(c, lengthOfStuff);
 
-  console.log(randomStuff);
 
   let output = "";
   for (let i = 0; i < s.length; i++) {
