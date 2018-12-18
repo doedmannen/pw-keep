@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PW Keeper</title>
+  <link href="https://fonts.googleapis.com/css?family=Exo|Kanit|VT323" rel="stylesheet">
+  <link rel="stylesheet" href="./css/master.css">
+</head>
+
+<body class="flex flex-dir-col">
+  <main class="flex oneflex">
+
+    <section class="oneflex empty-side"></section>
+
+    <section class="page-content flex twoflex flex-dir-col text-center">
+      <h1>PW Keeper</h1>
+      <p>
+        This is a really stupid approach to having long pseudo random passwords without having to remember them. This is not secure and I do not recommend using this.
+      </p>
+      <hr>
+      <p class="output-pw">Your password is generated here</p>
+      <hr>
+
+      <section class="input-group">
+        <span>
+          Site:
+        </span>
+        <span class="error-log error-site">Can not be left empty</span>
+        <input type="text" name="site" placeholder="Facebook"><br>
+        <span>
+          Easy password:
+        </span>
+        <span class="error-log error-pw">Must be at least 5 letters</span>
+        <input type="text" name="password" placeholder="ketchup"><br>
+        <span>
+          Some number:
+        </span>
+        <span class="error-log error-number">Must be a number</span>
+        <input type="text" name="number" placeholder="1971"><br>
+        <input class="submit" type="submit" value="Submit" onclick="generatePassword()">
+      </section>
+
+    </section>
+
+    <section class="oneflex empty-side"></section>
+  </main>
+
+  <!-- Script for project -->
+  <script src="./skript.js" charset="utf-8"></script>
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body{
+  height: 100vh;
+}
+
+h1 {
+  font-family: 'Kanit', sans-serif;
+  font-size: 300%;
+}
+
+p {
+  font-family: 'Exo', sans-serif;
+  font-size: 100%;
+  padding-bottom: 5%;
+}
+
+.output-pw {
+  font-family: 'VT323', monospace;
+  font-size: 150%;
+  padding: 0;
+}
+
+.input-group{
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 5%;
+  font-family: 'Exo', sans-serif;
+  font-size: 100%;
+}
+
+.input-group > input {
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 1% 0;
+  font-size: 100%;
+  text-align: center;
+  padding: 1%;
+}
+
+.input-group > .submit{
+  background-color: green;
+  font-family: 'Kanit', sans-serif;
+  font-size: 100%;
+  padding: 1%;
+  cursor: pointer;
+}
+
+.input-group > .error-log{
+  color: red;
+  font-size: 75%;
+  display: none;
+}
+
+/* Classes for flex */
+
+.flex{
+  display: flex;
+}
+
+.oneflex{
+  flex: 1;
+}
+
+.twoflex{
+  flex: 2;
+}
+
+.text-center{
+  text-align: center;
+}
+
+.just-center{
+  justify-content: center;
+}
+
+.flex-dir-row{
+  flex-direction: row;
+}
+
+.flex-dir-col{
+  flex-direction: column;
+}
+
+
+@media screen and (max-width: 768px) {
+  main{
+    padding: 5%;
+  }
+  h1{
+    font-size: 150%;
+  }
+  p{
+    font-size: 80%;
+  }
+  .output-pw{
+    font-size: 100%;
+  }
+  .empty-side{
+    display: none;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .page-content{
+    flex: 5;
+  }
+}
