@@ -82,7 +82,6 @@ function intoNumbers(s, c, n) {
   for(let i = 0; i < s.length; i++){
     s[i] = s[i].charCodeAt()*n;
   }
-  console.log(s);
   return s.join("");
 }
 
