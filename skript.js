@@ -24,6 +24,8 @@ function generatePassword() {
   document.getElementsByTagName('input')[1].value = "";
   document.getElementsByTagName('input')[2].value = "";
 
+  // bring focus back to first input
+  document.getElementsByTagName('input')[0].focus();
 
   // Check if input was valid, if not return 0
   if (!validInput(site, password, number))
@@ -39,27 +41,26 @@ function generatePassword() {
   inputString = organizeString(site, password);
 
   // Turn that string into numbers using charCodeAt multiplied with a prime number
-  inputString = intoNumbers(inputString, number);
+  inputString = intoNumbers(inputString, check, number);
 
-  // Turn that into a string again using a random string
-  inputString = intoRandom(inputString, check);
+  // Turn that number into a string again using a random string
+  inputString = intoRandom(inputString);
 
   // Make the output 20 chars long
   inputString = shortenString(inputString, 20);
 
-  // Update output and bring focus back to first input
+  // Update output
   output.innerHTML = inputString;
-  document.getElementsByTagName('input')[0].focus();
 }
 
 // For every letter in site + password get last num in charcode and add
 function getCheck(s, p) {
-  let total = s+p;
-  let output = 0;
+  let total = p.substr(0,3)+s.substr(0,3);
+  let output = "";
   for(let i = 0; i < total.length; i++){
     output += parseInt(total.charCodeAt(i).toString().substr(-1));
   }
-  return output;
+  return output.substr(0,6)/1;
 }
 
 
@@ -74,31 +75,44 @@ function shortenString(s, size) {
 }
 
 // Turning string into numbers
-function intoNumbers(s, n) {
+function intoNumbers(s, c, n) {
   output = "";
-  n = getPrimes(n);
+  n = getPrimes(c, n);
   s = s.split("");
   for(let i = 0; i < s.length; i++){
     s[i] = s[i].charCodeAt()*n;
   }
+  console.log(s);
   return s.join("");
 }
 
 
+function shuffleString(input, shuffle) {
+  input = input.split("");
+  for(let i = 0; i < 10; i++){
+    shuffle += shuffle;
+  }
+
+  for(let i = 0; i < shuffle.length; i++){
+    let tmpString;
+    let num = (shuffle[i]/1);
+    if(num % 2 === 0){
+      tmpString = input.pop();
+    } else {
+      tmpString = input.shift();
+    }
+    input.splice(num, 0, tmpString);
+  }
+  input = input.join("");
+  return input;
+}
+
 // Take numbers into random chars
 function intoRandom(s, c) {
 
-  let randomStuff = "8pi2d9IjSs4FNWZzn5HvRkQuYwbymqOJgtelKoPEf1TL3BAcChr0aGVMxUXD76";
-  let lengthOfStuff = randomStuff.length;
+  let randomStuff = "qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM_!?=+-#¤%@[]{}";
 
-  while(c > randomStuff.length){
-    c = parseInt(c/2);
-  }
-
-  randomStuff += randomStuff;
-
-  randomStuff = randomStuff.substr(c, lengthOfStuff);
-
+  randomStuff = shuffleString(randomStuff, s.substr(0,12));
 
   let output = "";
   for (let i = 0; i < s.length; i++) {
@@ -169,8 +183,8 @@ function validInput(site, password, number) {
 
 
 
-function getPrimes(n = 0) {
-  let numOfPrimes = 100001 + n;
+function getPrimes(start, n) {
+  let numOfPrimes = start + n;
   let primes = [];
   primes.push(2);
   for (let num = 3, count = 1; count < numOfPrimes; num += 2) {
