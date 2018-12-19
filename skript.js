@@ -9,6 +9,16 @@ document.querySelector('.input-group').addEventListener('keydown', (e) => {
     }
 });
 
+function removeEverything() {
+  document.getElementsByClassName('output-pw')[0].innerHTML = "Your password is generated here";
+  // Make sure we clear all the fields
+  document.getElementsByTagName('input')[0].value = "";
+  document.getElementsByTagName('input')[1].value = "";
+  document.getElementsByTagName('input')[2].value = "";
+
+  // bring focus back to first input
+  document.getElementsByTagName('input')[0].focus();
+}
 
 // Main function for generating password
 function generatePassword() {
@@ -51,6 +61,9 @@ function generatePassword() {
 
   // Update output
   output.innerHTML = inputString;
+  setTimeout(() => {
+    output.innerHTML = "Your password is generated here";
+  },60000);
 }
 
 // For every letter in site + password get last num in charcode and add

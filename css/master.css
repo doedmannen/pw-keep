@@ -62,6 +62,10 @@ p {
   color: black;
 }
 
+.input-group > * > .clear{
+  background-color: red;
+}
+
 .input-group > .error-log{
   color: red;
   font-size: 75%;

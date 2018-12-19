@@ -19,6 +19,9 @@
       <p>
         This is a really stupid approach to having long pseudo random passwords without having to remember them. This is not secure and I do not recommend using this.
       </p>
+      <p>
+        Password is removed from screen after 1 minute. Clicking on Clear everything will remove password output and clear all input fields.
+      </p>
       <hr>
       <p class="output-pw">Your password is generated here</p>
       <hr>
@@ -43,6 +46,7 @@
         <section>
 
           <input class="submit" type="submit" value="Submit" onclick="generatePassword()">
+          <input class="submit clear" type="submit" value="Clear everything" onclick="removeEverything()">
 
         </section>
       </section>
