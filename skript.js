@@ -1,6 +1,10 @@
 /*
+Version: 0.0.8
+
+
 TODO:
 Testing and improving
+Clean up in code :(
 
 */
 
