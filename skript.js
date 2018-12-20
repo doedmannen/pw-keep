@@ -112,11 +112,12 @@ function getCheck(s, p) {
 // Output needs to be a certain size
 function shortenString(s, size) {
   let jump = parseInt(s.length/size);
+  let start = s.charCodeAt(0).toString().substr(-1)/1;
   let output = "";
-  for(let i = 0; i < size; i++){
-    output += s.substr((jump*i),1)
+  for(let i = start; i < s.length; i += jump){
+    output += s.substr(i, 1);
   }
-  return output;
+  return output.substr(0,20);
 }
 
 // Turning string into numbers
