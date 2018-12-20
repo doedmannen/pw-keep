@@ -110,13 +110,22 @@ function getCheck(s, p) {
 
 
 // Output needs to be a certain size
-function shortenString(s, size) {
+function shortenString(s, size, start = null) {
   let jump = parseInt(s.length/size);
-  let start = s.charCodeAt(0).toString().substr(-1)/1;
+  if(start === null){
+    start = s.charCodeAt(0).toString().substr(-1)/1;
+  }
   let output = "";
   for(let i = start; i < s.length; i += jump){
     output += s.substr(i, 1);
   }
+  // Does the password have a repetetive pattern? Recursive
+  if(output.search(/(.)\1/) >= 0){
+    return shortenString(s, size, start+1);
+  }
+  if(output.length < 20)
+    return "Password generation failed";
+
   return output.substr(0,20);
 }
 
@@ -155,7 +164,7 @@ function shuffleString(input, shuffle) {
 // Take numbers into random chars
 function intoRandom(s, c) {
 
-  let randomStuff = "qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM_!?=+-#¤%@[]{}";
+  let randomStuff = "qwertyuiopasdfghjklzxcvbnm1234567890QWERTYUIOPASDFGHJKLZXCVBNM_!?=+-#%@[]{}";
 
   randomStuff = shuffleString(randomStuff, s.substr(0,12));
 
