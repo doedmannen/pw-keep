@@ -1,20 +1,52 @@
+/*
+TODO:
+Testing and improving 
+
+*/
+
+
 // Bring focus to first input field on pageload
 document.getElementsByTagName('input')[0].focus();
 
-// Listen for enter inside input-group
-document.querySelector('.input-group').addEventListener('keydown', (e) => {
+// Set timer var
+let timer;
+
+// Start timer
+function startTimer() {
+  timer = setTimeout(() => {
+    removeEverything();
+  }, 60000);
+}
+
+// Stop timer
+function stopTimer() {
+  clearTimeout(timer);
+}
+
+// Listen for keydown inside html
+document.querySelector('html').addEventListener('keydown', (e) => {
     var key = e.which || e.keyCode;
     if (key === 13) {
-      generatePassword();
+      generatePassword(); // Generate password on enter
+    } else if(key === 27){
+      removeEverything(); // Clear all input/output on escape
     }
 });
 
+/*
+  Function for removing all input and output from document.
+  This function runs if the Escape-key is pressed, if the "Clear everything"-button
+  is clicked or when the timer for 1 minute runs out.
+*/
 function removeEverything() {
+  stopTimer();
   document.getElementsByClassName('output-pw')[0].innerHTML = "Your password is generated here";
   // Make sure we clear all the fields
   document.getElementsByTagName('input')[0].value = "";
   document.getElementsByTagName('input')[1].value = "";
   document.getElementsByTagName('input')[2].value = "";
+
+  clearErrors();
 
   // bring focus back to first input
   document.getElementsByTagName('input')[0].focus();
@@ -22,6 +54,8 @@ function removeEverything() {
 
 // Main function for generating password
 function generatePassword() {
+  // Timer needs to be reset if active
+  stopTimer();
   // Get values from input
   let site, password, number, output, inputString, check;
   site = document.getElementsByTagName('input')[0].value.trim().toLowerCase();
@@ -59,16 +93,17 @@ function generatePassword() {
   // Make the output 20 chars long
   inputString = shortenString(inputString, 20);
 
-  // Update output
+  /*
+    Set a timer for 1 minute and remove all input and output from screen.
+
+   */
   output.innerHTML = inputString;
-  setTimeout(() => {
-    output.innerHTML = "Your password is generated here";
-  },60000);
+  startTimer();
 }
 
 // For every letter in site + password get last num in charcode and add
 function getCheck(s, p) {
-  let total = p.substr(0,3)+s.substr(0,3);
+  let total = p.substr(0,1)+s.substr(0,1)+p.substr(-2)+s.substr(0,2);
   let output = "";
   for(let i = 0; i < total.length; i++){
     output += parseInt(total.charCodeAt(i).toString().substr(-1));
@@ -164,6 +199,12 @@ function organizeString(site, password) {
   return output;
 }
 
+function clearErrors() {
+  let errorlogs = document.getElementsByClassName('error-log');
+  for (let errorlog of errorlogs) {
+    errorlog.style.display = "none";
+  }
+}
 
 /*
   Checks if the input was valid.
@@ -173,15 +214,12 @@ function organizeString(site, password) {
 */
 function validInput(site, password, number) {
   let valueForReturn = true;
-  let errorlogs = document.getElementsByClassName('error-log');
-  for (let errorlog of errorlogs) {
-    errorlog.style.display = "none";
-  }
+  clearErrors();
   if (site.length === 0) {
     document.getElementsByClassName('error-log')[0].style.display = "block";
     valueForReturn = false;
   }
-  if (password.search(/^[a-z]{5,}$/)) {
+  if (password.search(/^.{5,}$/)) {
     document.getElementsByClassName('error-log')[1].style.display = "block";
     valueForReturn = false;
   }
