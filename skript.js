@@ -4,7 +4,6 @@ Testing and improving
 
 */
 
-
 // Bring focus to first input field on pageload
 document.getElementsByTagName('input')[0].focus();
 
@@ -57,7 +56,7 @@ function generatePassword() {
   // Timer needs to be reset if active
   stopTimer();
   // Get values from input
-  let site, password, number, output, inputString, check;
+  let site, password, number, output, inputString, check, good, better, best;
   site = document.getElementsByTagName('input')[0].value.trim().toLowerCase();
   password = document.getElementsByTagName('input')[1].value.trim().toLowerCase();
   number = document.getElementsByTagName('input')[2].value.trim();
@@ -91,13 +90,11 @@ function generatePassword() {
   inputString = intoRandom(inputString);
 
   // Make the output 20 chars long
-  inputString = shortenString(inputString, 20);
+  output.innerHTML = shortenString(inputString, 20);
 
   /*
-    Set a timer for 1 minute and remove all input and output from screen.
-
-   */
-  output.innerHTML = inputString;
+  Set a timer for 1 minute and remove all input and output from screen.
+  */
   startTimer();
 }
 
@@ -175,6 +172,7 @@ function intoRandom(s, c) {
 
 
 function organizeString(site, password) {
+
   let large, small;
   if (password.length > site.length) {
     large = password;
@@ -190,11 +188,7 @@ function organizeString(site, password) {
 
   let output = "";
   for (let i = 0; i < large.length; i++) {
-    if (i % 2 === 0) {
-      output += `${large[i]}${small[i].toUpperCase()}`;
-    } else {
-      output += `${large[i].toUpperCase()}${small[i]}`;
-    }
+    output += `${alphaHasher(large[i])}${alphaHasher(small[i])}`;
   }
   return output;
 }
@@ -215,11 +209,11 @@ function clearErrors() {
 function validInput(site, password, number) {
   let valueForReturn = true;
   clearErrors();
-  if (site.length === 0) {
+  if (site.search(/^[a-zA-Z0-9]{3,}$/)) {
     document.getElementsByClassName('error-log')[0].style.display = "block";
     valueForReturn = false;
   }
-  if (password.search(/^.{5,}$/)) {
+  if (password.search(/^[a-zA-Z0-9]{5,}$/)) {
     document.getElementsByClassName('error-log')[1].style.display = "block";
     valueForReturn = false;
   }
@@ -230,8 +224,6 @@ function validInput(site, password, number) {
 
   return valueForReturn;
 }
-
-
 
 function getPrimes(start, n) {
   let numOfPrimes = start + n;
@@ -252,4 +244,76 @@ function getPrimes(start, n) {
     }
   }
   return primes.pop();
+}
+
+function alphaHasher(c) {
+  c = ""+c;
+  let alphaHash = {
+    "0":"etpxiAlWdW",
+    "1":"4ikXqLNEDl",
+    "2":"sHbX7vJ6A6",
+    "3":"xK48cIXiLv",
+    "4":"49Do5orfmE",
+    "5":"Yk7Wt59FZq",
+    "6":"Olsy4MPfym",
+    "7":"UNIHLEbEPb",
+    "8":"yv473w54Uu",
+    "9":"KuEUfEor09",
+    "q":"gR5mIZQ51T",
+    "w":"aZAj3MPDSX",
+    "e":"3KcsVjT2ch",
+    "r":"0LVJmrwaPH",
+    "t":"8pEiBmq9VL",
+    "y":"D4H7UszU0h",
+    "u":"CExJP0ktWu",
+    "i":"1jP3w7nZUf",
+    "o":"89AdOKRk1u",
+    "p":"3igCVX5qwM",
+    "a":"pbFRZsmuf8",
+    "s":"5G9Jphda9K",
+    "d":"br9sWKIWBx",
+    "f":"3cvuf0kD3O",
+    "g":"Olm0AyKVlf",
+    "h":"I84D6bKTVz",
+    "j":"Zbi7DyFmPC",
+    "k":"YyHXJX1DL9",
+    "l":"jlJtzhSMcp",
+    "m":"chdig5gueX",
+    "n":"7U983A7HLR",
+    "b":"vHLuVbxbwH",
+    "v":"Py4AymcdrX",
+    "c":"wzsM3uVjxh",
+    "x":"WLsNusAkK8",
+    "z":"raJeBSrzAz",
+    "P":"cRCvOP0iCh",
+    "O":"0QcDsU7t8Z",
+    "I":"LWDXXH8n2C",
+    "U":"T97IrPoBl9",
+    "Y":"vcmkk4wRK4",
+    "T":"0KHuamq1Ne",
+    "R":"Em6iphsUkO",
+    "E":"5DPHlRAiXx",
+    "W":"47CFnlN2iG",
+    "Q":"qcFBnia7mB",
+    "A":"wKDrb3df2t",
+    "S":"d64ug5DnEC",
+    "D":"JFCAQ4btR6",
+    "F":"N8ou1kYCAd",
+    "G":"ZsLVkM9KnF",
+    "H":"KeDXPyt0VY",
+    "J":"cFgBftgW7o",
+    "K":"vUUhgrwmnh",
+    "L":"UZkMWxgrdE",
+    "M":"D0ShjX7nxj",
+    "N":"acRmDMm0d0",
+    "B":"FLpVcpZXjx",
+    "V":"WCPZHyGl29",
+    "C":"RSzLknS5aY",
+    "X":"KHYxvfExzr",
+    "Z":"PAmfTefzA6"
+  }
+  let correctInput = c.length === 1 && alphaHash[c] !== undefined;
+  if(!correctInput)
+    throw("NEIN");
+  return alphaHash[c];
 }
