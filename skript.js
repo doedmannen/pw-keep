@@ -1,6 +1,6 @@
 /*
 TODO:
-Testing and improving 
+Testing and improving
 
 */
 
@@ -103,7 +103,7 @@ function generatePassword() {
 
 // For every letter in site + password get last num in charcode and add
 function getCheck(s, p) {
-  let total = p.substr(0,1)+s.substr(0,1)+p.substr(-2)+s.substr(0,2);
+  let total = p.substr(0,1)+s.substr(0,1)+p.substr(-2)+s.substr(0,2)+p.substr(-3);
   let output = "";
   for(let i = 0; i < total.length; i++){
     output += parseInt(total.charCodeAt(i).toString().substr(-1));
