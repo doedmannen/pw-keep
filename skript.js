@@ -1,10 +1,10 @@
 /*
-Version: 0.0.8
+Version: 0.0.9
 
 
 TODO:
-Testing and improving
-Clean up in code :(
+Should take a day to make a total rewrite since this is shit...
+
 
 */
 
